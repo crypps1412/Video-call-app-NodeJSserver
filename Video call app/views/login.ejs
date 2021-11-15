@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vn">
+
+<head>
+    <title>Crypps Chat Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/Logo.png" />
+    <script>
+        const ROOMS = "<%= rooms %>";
+    </script>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        #form {
+            border: 3px solid #f1f1f1;
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        
+        button {
+            background-color: #04AA6D;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        button:hover {
+            opacity: 0.8;
+        }
+        
+        .container {
+            padding: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="text-align: center;">CREATE OR JOIN</h2>
+
+    <div id="form">
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="user" id="uname" required>
+
+            <label for="rname"><b>Room</b></label>
+            <input type="text" placeholder="Enter Room" name="room" id="rname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="pass" id="psw" required>
+
+            <button onclick="roomCheck('/create-room')">Create a room</button>
+            <button onclick="roomCheck('/join-room')">Join a room</button>
+        </div>
+    </div>
+    <label for="rooms"><b>Rooms online:</b></label>
+    <input type="text" id="rooms" disabled>
+    <hr>
+
+    <script>
+        document.getElementById('rooms').value = ROOMS;
+
+        function roomCheck(enterMethod) {
+            const user = document.getElementById('uname').value;
+            const room = document.getElementById('rname').value;
+            const pass = document.getElementById('psw').value;
+
+            fetch(enterMethod, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    room: room,
+                    pass: pass
+                })
+            }).then(res => res.json()).then(data => {
+                if (data.stt === 'Ok')
+                    window.location.href = '/' + room + '/' + user + '/' + data.id;
+                else alert(data.stt);
+            }).catch(err => {
+                alert('Server err!');
+                console.log(err);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="vn">
+
+<head>
+    <title>Crypps Chat</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        const ROOM_ID = "<%= roomId %>";
+        const MY_NAME = "<%= userName %>";
+        const ROOM_NAME = "<%= roomName %>";
+    </script>
+    <link rel="stylesheet" href="/style.css">
+    <script type="text/javascript" defer src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js" defer></script>
+    <script type="text/javascript" src="/script.js" defer></script>
+    <link rel="shortcut icon" href="/Logo.png" />
+</head>
+
+<body>
+    <h1 id="roomName" style="text-align: center;"></h1>
+    <div id="video-grid"></div>
+</body>
+
+</html>
