@@ -19,7 +19,7 @@ const { v4: uuidV4 } = require('uuid');
 /* Peer Server */
 const { PeerServer } = require('peer');
 const peerServer = PeerServer({
-    host: '192.168.1.6',
+    host: '/',
     port: '8081',
     path: '/video-call',
     ssl: options
@@ -119,6 +119,6 @@ io.on('connection', socket => { // Connect to other peers in the room
 
 
 /* Server listening */
-server.listen(port, () => {
-    console.log('Listening on port: ' + port);
-})
+// server.listen(port, () => {
+//     console.log('Listening on port: ' + port);
+// })
